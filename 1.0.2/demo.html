@@ -157,7 +157,6 @@
 	      </div>
 	    </div>
 		
-
  		<div class="timeline__item">
 	      <div class="timeline__item__station"></div>
 	      <div class="timeline__item__content">
@@ -188,14 +187,55 @@
 
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script>
-jQuery(window).ready(function() {
 
-	
-	
+var ImageExplorer=(function ()
+{
+	var unique;
+    function getInstance(){
+        if( unique === undefined ){
+            unique = new Construct();
+        }
+        return unique;
+    }
+	function Construct(){
+	    var self=this;
+		self.previewbox;
+		self.openImage=function(imgPath)
+		{
+		   var imgpreviewbox=self.previewbox.empty().show();
+		   var img=$("<img>").css({
+		    "position":"absolute",
+		   	"transform":"translate(-50%,-50%)",
+		   	"top":"50%",
+		   	"left":"50%",
+		   	"z-index":"5",
+		   	"max-height":"100%",
+		   	"max-width":"100%"
+		   	});
+		   img.attr("src",imgPath);
+		   self.previewbox.append(img);
+		};
+		self.init=function()
+		{
+			self.previewbox=$('<div id="previewbox" style="position:fixed;z-index:5;top: 0;bottom:0;right:0;left:0;text-align:center;display:none;"></div>');
+			self.previewbox.click(function(){
+			 	self.previewbox.hide();
+			});
+			$("body").append(self.previewbox);
+		}
+		self.init();
+	};
+	return {getInstance : getInstance}
+})();
+
+jQuery(window).ready(function() {
+		$(".stackbox").on("click",function(e){
+			var imgE=ImageExplorer.getInstance();
+			imgE.openImage($(e.currentTarget).find("img").first().attr("src"));
+		});
 });
 </script>
 <!-- END PAGE LEVEL SCRIPTS -->
-
 
 
 </html>
