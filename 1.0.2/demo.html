@@ -7,7 +7,14 @@
 	<link rel="stylesheet" href="plugin.css">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.waypoints.min.js"></script>
+
+
+	<link rel="stylesheet" href="js/photoswipe/photoswipe.css"> 
+	<link rel="stylesheet" href="js/photoswipe/default-skin/default-skin.css"> 
+	<script type="text/javascript" src="js/photoswipe/photoswipe.min.js"></script>
+	<script type="text/javascript" src="js/photoswipe/photoswipe-ui-default.min.js"></script>
 	
+
 	<style>
 			
 			* {
@@ -228,12 +235,15 @@ var ImageExplorer=(function ()
 	return {getInstance : getInstance}
 })();
 
+
+
 jQuery(window).ready(function() {
 		$(".stackbox").on("click",function(e){
 			var imgE=ImageExplorer.getInstance();
 			imgE.openImage($(e.currentTarget).find("img").first().attr("src"));
 		});
 });
+
 </script>
 <!-- END PAGE LEVEL SCRIPTS -->
 
